@@ -17,12 +17,13 @@ class TicketController extends Controller
         $date = $request->input('date');
         $adults = $request->input('adults');
         $children = $request->input('children');
-        $tickets = Schedule::where('from_location_id', $fromLocationId)
+        $schedules = Schedule::where('from_location_id', $fromLocationId)
                         ->where('to_location_id', $toLocationId)
                         ->get();
-        dd($tickets);
+        // dd($fromLocationId,$toLocationId,$date,$adults,$children,$tickets);
+
         return view('tickets', [
-            'tickets' => $tickets,
+            'schedules' => $schedules,
             'date' => $date,
             'adults' => $adults,
             'children' => $children

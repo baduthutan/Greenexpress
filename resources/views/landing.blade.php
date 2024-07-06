@@ -24,7 +24,7 @@
                     @foreach ($areas as $area)
                         <optgroup label="{{ $area->area_name }}">
                             @foreach ($area->locations as $location)
-                                <option value="{{ $location->id }}" data-area-id="{{ $location->area_id }}">{{ $location->address }}</option>
+                                <option value="{{ $location->location_id }}" data-area-id="{{ $location->area_id }}">{{ $location->address }}</option>
                             @endforeach
                         </optgroup>
                     @endforeach
@@ -37,7 +37,7 @@
                     @foreach ($areas as $area)
                         <optgroup label="{{ $area->area_name }}">
                             @foreach ($area->locations as $location)
-                                <option value="{{ $location->id }}" data-area-id="{{ $location->area_id }}">{{ $location->address }}</option>
+                                <option value="{{ $location->location_id }}" data-area-id="{{ $location->area_id }}">{{ $location->address }}</option>
                             @endforeach
                         </optgroup>
                     @endforeach
