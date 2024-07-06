@@ -62,26 +62,43 @@
     </section>
 
     <script>
-            function enableAndFilterToOptions(allowedAreaIds) {
-                toSelect.disabled = false;
-                const optgroups = toSelect.querySelectorAll('optgroup');
-                optgroups.forEach(optgroup => {
-                    let hasVisibleOption = false;
-                    const options = optgroup.querySelectorAll('option');
-                    options.forEach(option => {
-                        const optionAreaId = option.getAttribute('data-area-id');
-                        if (allowedAreaIds.includes(parseInt(optionAreaId))) {
-                            option.style.display = 'block';
-                            hasVisibleOption = true;
-                        } else {
-                            option.style.display = 'none';
-                        }
-                    });
-                    optgroup.style.display = hasVisibleOption ? 'block' : 'none';
-                });
-                toSelect.value = ''; // Reset the 'to' selection
+    $(document).ready(function() {
+        const fromSelect = $('#from');
+        const toSelect = $('#to');
+
+        fromSelect.on('change', function() {
+            const selectedOption = $(this).find('option:selected');
+            const selectedAreaId = selectedOption.data('area-id');
+            let allowedAreaIds = [];
+            if (selectedAreaId == 1 || selectedAreaId == 2) {
+                allowedAreaIds = [3, 4];
+            }else{
+                allowedAreaIds = [1,2];
             }
+
+            enableAndFilterToOptions(allowedAreaIds);
         });
+
+        function enableAndFilterToOptions(allowedAreaIds) {
+            toSelect.prop('disabled', false);
+            toSelect.find('optgroup').each(function() {
+                let hasVisibleOption = false;
+                const options = $(this).find('option');
+                options.each(function() {
+                    const optionAreaId = $(this).data('area-id');
+                    if (allowedAreaIds.includes(parseInt(optionAreaId))) {
+                        $(this).show();
+                        hasVisibleOption = true;
+                    } else {
+                        $(this).hide();
+                    }
+                });
+                $(this).toggle(hasVisibleOption);
+            });
+            toSelect.val(''); // Reset the 'to' selection
+        }
+    });
     </script>
+    
 @endsection
 

@@ -25,8 +25,9 @@
     </header>
 
     <!-- Main Section -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <main class="container mx-auto p-4">
         @yield('content')
-    </main>
+    </main>  
 </body>
 </html>
