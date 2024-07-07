@@ -5,7 +5,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use App\Models\Schedule;
 
 class TicketController extends Controller
@@ -24,6 +23,23 @@ class TicketController extends Controller
 
         return view('tickets', [
             'schedules' => $schedules,
+            'date' => $date,
+            'adults' => $adults,
+            'children' => $children
+        ]);
+    }
+    public function book(Request $request)
+    {
+        $schedule = $request->input('schedule');
+        $date = $request->input('date');
+        $adults = $request->input('adults');
+        $children = $request->input('children');
+        $choosen = Schedule::where('schedule_id', $schedule)
+                        ->get()->first();
+        // dd($choosen);
+
+        return view('order', [
+            'schedule' => $choosen,
             'date' => $date,
             'adults' => $adults,
             'children' => $children

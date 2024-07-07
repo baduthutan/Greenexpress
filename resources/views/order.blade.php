@@ -3,138 +3,93 @@
 @section('content')
         <!-- Order Form Section -->
         <section class="bg-white shadow-lg rounded-lg p-6 lg:w-2/3 mb-6 lg:mb-0">
-            <!-- Contact Details -->
-            <div class="mb-6">
-                <h2 class="text-2xl font-bold mb-4">Detail Pemesan</h2>
-                <p class="text-gray-600 mb-4">Detail kontak ini akan digunakan untuk pengiriman e-tiket dan keperluan reschedule.</p>
+                <h2 class="text-2xl font-semibold mb-6">Order Data</h2>
                 <form>
-                    <div class="mb-4">
-                        <label class="block text-gray-700 mb-2">Title</label>
-                        <div class="flex space-x-4">
-                            <label class="flex items-center">
-                                <input type="radio" name="title" value="Mr" class="form-radio">
-                                <span class="ml-2">Mr</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="radio" name="title" value="Mrs" class="form-radio">
-                                <span class="ml-2">Mrs</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="radio" name="title" value="Ms" class="form-radio">
-                                <span class="ml-2">Ms</span>
-                            </label>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label for="customer-name" class="block text-sm font-medium text-gray-700">Customer Name<span class="text-red-500">*</span></label>
+                      <input type="text" id="customer-name" name="customer-name" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Customer Name" required>
+                    </div>
+                    <div>
+                      <label for="passenger-name" class="block text-sm font-medium text-gray-700">Passenger Name<span class="text-red-500">*</span></label>
+                      <input type="text" id="passenger-name" name="passenger-name" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Passenger Name" required>
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700">
+                        <input type="checkbox" id="same-name" name="same-name" class="mr-2">
+                        Passenger Name is the same with the Customer Name above
+                      </label>
+                    </div>
+                    <div></div>
+                    <div>
+                      <label for="customer-phone" class="block text-sm font-medium text-gray-700">Customer Phone<span class="text-red-500">*</span></label>
+                      <div class="mt-1 relative rounded-md shadow-sm">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                          <span class="text-gray-500 sm:text-sm">+1</span>
                         </div>
+                        <input type="text" id="customer-phone" name="customer-phone" class="pl-7 block w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Customer Phone" required>
+                      </div>
+                      <p class="mt-1 text-sm text-gray-500">Please fill in US phone number if available</p>
                     </div>
-                    <div class="mb-4">
-                        <label for="fullname" class="block text-gray-700">Full Name According to ID/Passport</label>
-                        <input type="text" id="fullname" class="w-full border border-gray-300 p-2 rounded" placeholder="Full Name According to ID/Passport">
-                    </div>
-                    <div class="mb-4">
-                        <label for="mobile" class="block text-gray-700">Mobile Number</label>
-                        <div class="flex">
-                            <span class="inline-flex items-center px-3 rounded-l border border-r-0 border-gray-300 bg-gray-200 text-gray-700">+62</span>
-                            <input type="tel" id="mobile" class="w-full border border-gray-300 p-2 rounded-r" placeholder="Mobile Number">
+                    <div>
+                      <label for="passenger-phone" class="block text-sm font-medium text-gray-700">Passenger Phone<span class="text-red-500">*</span></label>
+                      <div class="mt-1 relative rounded-md shadow-sm">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                          <span class="text-gray-500 sm:text-sm">+1</span>
                         </div>
+                        <input type="text" id="passenger-phone" name="passenger-phone" class="pl-7 block w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Passenger Phone" required>
+                      </div>
+                      <p class="mt-1 text-sm text-gray-500">Please fill in US phone number if available</p>
                     </div>
-                    <div class="mb-4">
-                        <label for="email" class="block text-gray-700">Email Address</label>
-                        <input type="email" id="email" class="w-full border border-gray-300 p-2 rounded" placeholder="Email Address">
+                    <div class="md:col-span-2">
+                      <label for="customer-email" class="block text-sm font-medium text-gray-700">Customer Email</label>
+                      <input type="email" id="customer-email" name="customer-email" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Customer Email">
                     </div>
+                    <div>
+                      <label for="luggage-qty" class="block text-sm font-medium text-gray-700">Luggage Qty</label>
+                      <div class="mt-1 relative rounded-md shadow-sm">
+                        <input type="number" id="luggage-qty" name="luggage-qty" class="block w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" min="0" placeholder="0">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">
+                          Pcs
+                        </div>
+                      </div>
+                      <p class="mt-1 text-sm text-gray-500">Free of charge luggage max 2 pieces and 1 piece hand carry bag. Unusual and fragile luggage must be declared and confirmed. It will be rejected if not declared and confirmed</p>
+                    </div>
+                    <div>
+                      <label for="oversized-luggage-qty" class="block text-sm font-medium text-gray-700">Overweight/Oversized Luggage Qty</label>
+                      <div class="mt-1 relative rounded-md shadow-sm">
+                        <input type="number" id="oversized-luggage-qty" name="oversized-luggage-qty" class="block w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" min="0" placeholder="0">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">
+                          Pcs
+                        </div>
+                      </div>
+                      <p class="mt-1 text-sm text-gray-500">Boxes baggage will be considered as overweight/oversized. Max Weight luggage 50 lbs each, max dimension: L+W+H = 62 inch Hand carry bag max weight 15 lbs, max dimension 22”+14”+9”= 45”</p>
+                    </div>
+                    <div class="md:col-span-2">
+                      <label for="flight-number" class="block text-sm font-medium text-gray-700">Flight Number</label>
+                      <input type="text" id="flight-number" name="flight-number" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Flight Number">
+                    </div>
+                    <div class="md:col-span-2">
+                      <label for="flight-info" class="block text-sm font-medium text-gray-700">Flight Info</label>
+                      <textarea id="flight-info" name="flight-info" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" rows="3" placeholder="Flight info ie: inform us your departure time or other info"></textarea>
+                    </div>
+                    <div class="md:col-span-2">
+                      <label for="notes" class="block text-sm font-medium text-gray-700">Notes</label>
+                      <textarea id="notes" name="notes" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" rows="3" placeholder="Pick up time (for Charter Service). Put your other notes here"></textarea>
+                    </div>
+                  </div>
                 </form>
-            </div>
-
-            <!-- Passenger Details -->
-            <div>
-                <h2 class="text-2xl font-bold mb-4">Detail Penumpang</h2>
-                <p class="text-gray-600 mb-4">Pastikan untuk mengisi detail penumpang dengan benar agar perjalananmu lancar.</p>
-                <!-- Passenger 1 -->
-                <div class="bg-gray-50 p-4 rounded-lg mb-4">
-                    <h3 class="text-xl font-bold mb-4">Penumpang 1</h3>
-                    <div class="flex justify-between items-center mb-4">
-                        <div>
-                            <p class="font-semibold">Haryanto</p>
-                            <p>Kursi 3C</p>
-                        </div>
-                        <button class="text-blue-500">Ubah kursi</button>
-                    </div>
-                    <form>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 mb-2">Title</label>
-                            <div class="flex space-x-4">
-                                <label class="flex items-center">
-                                    <input type="radio" name="passenger1_title" value="Mr" class="form-radio">
-                                    <span class="ml-2">Mr</span>
-                                </label>
-                                <label class="flex items-center">
-                                    <input type="radio" name="passenger1_title" value="Mrs" class="form-radio">
-                                    <span class="ml-2">Mrs</span>
-                                </label>
-                                <label class="flex items-center">
-                                    <input type="radio" name="passenger1_title" value="Ms" class="form-radio">
-                                    <span class="ml-2">Ms</span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <label for="passenger1_fullname" class="block text-gray-700">Full Name According to ID/Passport</label>
-                            <input type="text" id="passenger1_fullname" class="w-full border border-gray-300 p-2 rounded" placeholder="Full Name According to ID/Passport">
-                        </div>
-                        <div class="mb-4">
-                            <label for="passenger1_dob" class="block text-gray-700">Date of Birth</label>
-                            <input type="date" id="passenger1_dob" class="w-full border border-gray-300 p-2 rounded">
-                        </div>
-                    </form>
-                </div>
-
-                <!-- Passenger 2 -->
-                <div class="bg-gray-50 p-4 rounded-lg">
-                    <h3 class="text-xl font-bold mb-4">Penumpang 2</h3>
-                    <div class="flex justify-between items-center mb-4">
-                        <div>
-                            <p class="font-semibold">Haryanto</p>
-                            <p>Kursi 3D</p>
-                        </div>
-                        <button class="text-blue-500">Ubah kursi</button>
-                    </div>
-                    <form>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 mb-2">Title</label>
-                            <div class="flex space-x-4">
-                                <label class="flex items-center">
-                                    <input type="radio" name="passenger2_title" value="Mr" class="form-radio">
-                                    <span class="ml-2">Mr</span>
-                                </label>
-                                <label class="flex items-center">
-                                    <input type="radio" name="passenger2_title" value="Mrs" class="form-radio">
-                                    <span class="ml-2">Mrs</span>
-                                </label>
-                                <label class="flex items-center">
-                                    <input type="radio" name="passenger2_title" value="Ms" class="form-radio">
-                                    <span class="ml-2">Ms</span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <label for="passenger2_fullname" class="block text-gray-700">Full Name According to ID/Passport</label>
-                            <input type="text" id="passenger2_fullname" class="w-full border border-gray-300 p-2 rounded" placeholder="Full Name According to ID/Passport">
-                        </div>
-                        <div class="mb-4">
-                            <label for="passenger2_dob" class="block text-gray-700">Date of Birth</label>
-                            <input type="date" id="passenger2_dob" class="w-full border border-gray-300 p-2 rounded">
-                        </div>
-                    </form>
-                </div>
-            </div>
         </section>
 
         <!-- Booking Detail Section -->
         <section class="bg-green-500 text-white shadow-lg rounded-lg p-6 lg:w-1/3">
             <h2 class="text-2xl font-bold mb-4">Booking Detail</h2>
             <p class="mb-4">Booking Type: Shuttle</p>
-            <p>From: Philadelphia - 2800 south 3rd st PA19148 (Oregon Supermarket)</p>
-            <p>To: JFK Airport - Terminal 1</p>
-            <p>Date: 2024 Jul 04 07:50 AM</p>
-            <p>Passenger: 2 Adult 1 Child</p>
+            <p>From: {{$schedule->fromlocation->area->area_name}} - {{$schedule->fromlocation->address}}</p>
+            <p>To: {{$schedule->tolocation->area->area_name}} - {{$schedule->tolocation->address}}</p>
+            <p>Date: {{$date}} {{$schedule->departure_time}}</p>
+            <p>Adult passenger: {{$adults}} person</p>
+            <p>Child passenger: {{$children}} person</p>
             <p>Luggage: 0 Pcs</p>
             <p>Overweight or Oversized Luggage: 0 Pcs</p>
             <div class="mt-4">

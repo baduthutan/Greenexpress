@@ -21,7 +21,4 @@ Route::get('/', function () {
 
 Route::post('/tickets', [TicketController::class, 'search'])->name('ticket.search');
 
-
-Route::get('/order', function () {
-    return view('order');
-});
+Route::post('/order', [TicketController::class, 'book'])->name('ticket.book');
