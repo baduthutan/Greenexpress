@@ -2,9 +2,10 @@
 
 @section('content')
         <!-- Order Form Section -->
-        <section class="bg-white shadow-lg rounded-lg p-6 lg:w-2/3 mb-6 lg:mb-0">
+        <form id="myForm">
+        <div class="grid grid-cols-3 gap-4">
+            <section class="bg-white shadow-lg rounded-lg p-6 md:col-span-2">
                 <h2 class="text-2xl font-semibold mb-6">Order Data</h2>
-                <form>
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label for="customer-name" class="block text-sm font-medium text-gray-700">Customer Name<span class="text-red-500">*</span></label>
@@ -49,9 +50,9 @@
                       <label for="luggage-qty" class="block text-sm font-medium text-gray-700">Luggage Qty</label>
                       <div class="mt-1 relative rounded-md shadow-sm">
                         <input type="number" id="luggage-qty" name="luggage-qty" class="block w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" min="0" placeholder="0">
-                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">
+                        {{-- <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">
                           Pcs
-                        </div>
+                        </div> --}}
                       </div>
                       <p class="mt-1 text-sm text-gray-500">Free of charge luggage max 2 pieces and 1 piece hand carry bag. Unusual and fragile luggage must be declared and confirmed. It will be rejected if not declared and confirmed</p>
                     </div>
@@ -78,35 +79,51 @@
                       <textarea id="notes" name="notes" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" rows="3" placeholder="Pick up time (for Charter Service). Put your other notes here"></textarea>
                     </div>
                   </div>
-                </form>
         </section>
-
-        <!-- Booking Detail Section -->
-        <section class="bg-green-500 text-white shadow-lg rounded-lg p-6 lg:w-1/3">
-            <h2 class="text-2xl font-bold mb-4">Booking Detail</h2>
-            <p class="mb-4">Booking Type: Shuttle</p>
-            <p>From: {{$schedule->fromlocation->area->area_name}} - {{$schedule->fromlocation->address}}</p>
-            <p>To: {{$schedule->tolocation->area->area_name}} - {{$schedule->tolocation->address}}</p>
-            <p>Date: {{$date}} {{$schedule->departure_time}}</p>
-            <p>Adult passenger: {{$adults}} person</p>
-            <p>Child passenger: {{$children}} person</p>
-            <p>Luggage: 0 Pcs</p>
-            <p>Overweight or Oversized Luggage: 0 Pcs</p>
-            <div class="mt-4">
-                <p class="flex justify-between"><span>Base Price:</span><span>$210</span></p>
-                <p class="flex justify-between"><span>Special request drop off Price:</span><span>$0</span></p>
-                <p class="flex justify-between"><span>Extra Luggage Price:</span><span>$0</span></p>
-                <p class="flex justify-between"><span>Overweight or Oversized Luggage Price:</span><span>$0</span></p>
-                <div class="mt-4">
-                    <label for="voucher" class="block text-gray-700">Voucher</label>
-                    <input type="text" id="voucher" class="w-full border border-gray-300 p-2 rounded text-gray-700" placeholder="Voucher">
-                </div>
-                <div class="mt-4">
-                    <p class="flex justify-between"><span>Sub Total:</span><span>$210</span></p>
-                    <p class="flex justify-between"><span>Payment Fee (3.7%):</span><span>$7.77</span></p>
-                    <p class="flex justify-between"><span>Grand Total:</span><span>$217.77</span></p>
-                </div>
+                <!-- Booking Detail Section -->
+                <section class="bg-green-500 text-white shadow-lg rounded-lg p-6">
+                    <h2 class="text-2xl font-bold mb-4">Booking Detail</h2>
+                    <p class="mb-4">Booking Type: Shuttle</p>
+                    <p>From: {{$schedule->fromlocation->area->area_name}} - {{$schedule->fromlocation->address}}</p>
+                    <p>To: {{$schedule->tolocation->area->area_name}} - {{$schedule->tolocation->address}}</p>
+                    <p>Date: {{$date}} {{$schedule->departure_time}}</p>
+                    <p>Adult passenger: {{$adults}} person</p>
+                    <p>Child passenger: {{$children}} person</p>
+                    <p>Luggage: 0 Pcs</p>
+                    <p>Overweight or Oversized Luggage: 0 Pcs</p>
+                    <div class="mt-4">
+                        <p class="flex justify-between"><span>Base Price:</span><span>$210</span></p>
+                        <p class="flex justify-between"><span>Special request drop off Price:</span><span>$0</span></p>
+                        <p class="flex justify-between"><span>Extra Luggage Price:</span><span>$0</span></p>
+                        <p class="flex"><span id="displayLuggage">0</span> piece(s)</p>
+                        <p class="flex justify-between"><span>Overweight or Oversized Luggage Price:</span><span>$0</span></p>
+                        <div class="mt-4">
+                            <label for="voucher" class="block text-gray-700">Voucher</label>
+                            <input type="text" id="voucher" class="w-full border border-gray-300 p-2 rounded text-gray-700" placeholder="Voucher">
+                        </div>
+                        <div class="mt-4">
+                            <p class="flex justify-between"><span>Sub Total:</span><span>${{$schedule->ticket_price}}</span></p>
+                            <p class="flex justify-between"><span>Payment Fee (3.7%):</span><span>${{$schedule->ticket_price * 0.037, 2}}</span></p>
+                            <p class="flex justify-between"><span>Grand Total:</span><span>$217.77</span></p>
+                        </div>
+                    </div>
+                    <button type="submit" class="bg-blue-500 text-white p-2 mt-4 w-full rounded">Booking</button>
+                </section>
             </div>
-            <button class="bg-blue-500 text-white p-2 mt-4 w-full rounded">Booking</button>
-        </section>
+        </form>
+        <script>
+            $(document).ready(function() {
+                var $luggageQty = $('#luggage-qty');
+                var $displayLuggage = $('#displayValue');
+
+                $luggageQty.on('input', function() {
+                    $displayLuggage.text($(this).val());
+                });
+
+                $('#myForm').on('submit', function(event) {
+                    event.preventDefault(); // Prevent the form from submitting
+                    $displayElement.text($inputElement.val());
+                });
+            });
+        </script>
 @endsection
