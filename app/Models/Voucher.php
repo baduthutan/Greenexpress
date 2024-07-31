@@ -4,23 +4,36 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Voucher extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
-    protected $primaryKey = 'voucher_id';
-
-    public $timestamps = false;
-
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
+        'name',
+        // 'agent_id',
         'code',
-        'discount',
-        'expiration_date',
+        'date_start',
+        'date_expired',
+        'discount_type',
+        'discount_value',
+        'is_active',
     ];
 
-    public function orders()
-    {
-        return $this->hasMany(Order::class, 'voucher_id', 'voucher_id');
-    }
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
+    // public function agent()
+    // {
+    //     return $this->belongsTo(Agent::class);
+    // }
 }

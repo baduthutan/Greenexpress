@@ -9,17 +9,12 @@ class Vehicle extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'vehicle_id';
-
-    public $timestamps = false;
-
     protected $fillable = [
-        'vehicle_type',
-        'capacity',
+        'vehicle_number',
+        'vehicle_name',
+        'driver_contact',
+        'photo',
+        'notes',
+        'total_seat',
     ];
-
-    public function orders()
-    {
-        return $this->hasMany(Order::class, 'vehicle_id', 'vehicle_id');
-    }
 }
