@@ -12,15 +12,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-    <link rel="stylesheet" href="{{ asset('intl-tel-input-master/css/intlTelInput.css') }}">
+    <link rel="stylesheet" href="intl-tel-input-master/css/intlTelInput.css">
     <!-- owl carousel css -->
-    <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }} ">
+    <link rel="stylesheet" href="css/owl.carousel.min.css ">
     <!-- font awesome icons -->
-    <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}" />
+    <link rel="stylesheet" href="css/font-awesome.css" />
     <!-- bootstrap css -->
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
     <!-- main css -->
-    <link rel="stylesheet" href="{{ asset('css/welcome.css') }}" />
+    <link rel="stylesheet" href="css/welcome.css" />
     {{-- slick css --}}
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
@@ -34,22 +34,22 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
-    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('img/favicon/apple-icon-57x57.png') }}">
-    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('img/favicon/apple-icon-60x60.png') }}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('img/favicon/apple-icon-72x72.png') }}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('img/favicon/apple-icon-76x76.png') }}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('img/favicon/apple-icon-114x114.png') }}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('img/favicon/apple-icon-120x120.png') }}">
-    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('img/favicon/apple-icon-144x144.png') }}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('img/favicon/apple-icon-152x152.png') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/favicon/apple-icon-180x180.png') }}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('img/favicon/android-icon-192x192.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/favicon/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('img/favicon/favicon-96x96.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/favicon/favicon-16x16.png') }}">
-    <link rel="manifest" href="{{ asset('img/favicon/manifest.json') }}">
+    <link rel="apple-touch-icon" sizes="57x57" href="img/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="img/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="img/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="img/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="img/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="img/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="img/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="img/favicon/manifest.json">
     <meta name="msapplication-TileColor" content="#02E602">
-    <meta name="msapplication-TileImage" content="{{ asset('img/favicon/ms-icon-144x144.png') }}">
+    <meta name="msapplication-TileImage" content="img/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#02E602">
     <style>
         .float {
@@ -91,7 +91,7 @@
 
     @yield('page_content')
 
-    <!--@include('layouts.frontend.android')-->
+
 
     <!-- footer section start -->
     @include('layouts.frontend.footer')
@@ -143,15 +143,15 @@
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
     </script>
     <!-- bootstrap js -->
-    <script src="{{ asset('js/bootstrap4.6.0.min.js') }}"></script>
+    <script src="js/bootstrap4.6.0.min.js"></script>
     <!-- owl carousel js -->
-    <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+    <script src="js/owl.carousel.min.js"></script>
     <!-- ScrollIt js -->
-    <script src="{{ asset('js/scrollIt.min.js') }}"></script>
+    <script src="js/scrollIt.min.js"></script>
     <!-- sweetalert2 -->
-    <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
+    <script src="js/sweetalert2.all.min.js"></script>
     <!-- blockui -->
-    <script src="{{ asset('js/jquery.blockUI.js') }}"></script>
+    <script src="js/jquery.blockUI.js"></script>
     {{-- slick js --}}
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     {{-- choice js --}}

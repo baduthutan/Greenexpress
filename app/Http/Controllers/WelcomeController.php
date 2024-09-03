@@ -68,58 +68,72 @@ class WelcomeController extends Controller
         return view('page', $data);
     }
 
-    public function search(Request $request)
+    public function schedule()
     {
-
-        if($request->booking_type !== 'shuttle'){
-
-            $master_area = MasterArea::query()
-                ->with(['master_sub_area' => function ($q) {
-                    $q->where('is_active', '1')->whereIn('is_charter',[1,2]);
-                }])->where('is_active', '1')->whereIn('is_charter',[1,2])->get();
-
-        }else{
-            $master_area = MasterArea::query()
-                ->with(['master_sub_area' => function ($q) {
-                    $q->where('is_active', '1')->whereIn('is_charter',[0,2]);
-                }])->where('is_active', '1')->whereIn('is_charter',[0,2])->get();
-
-        }
-
-        $sub_area = MasterSubArea::where('id', $request->to_master_sub_area_id)->first();
-        if($request->booking_type !== 'shuttle'){
-
-            $arrival_area = MasterArea::query()
-                // ->where('id', !empty($sub_area) ? $sub_area->master_area_id : 0)
-                ->where('area_type','<>', $request->area_type)
-                ->with(['master_sub_area' => function ($q) {
-                    $q->where('is_active', '1')->whereIn('is_charter',[1,2]);
-                }])->where('is_active', '1')->whereIn('is_charter',[1,2])->get();
-
-        }else{
-            $arrival_area = MasterArea::query()
-                // ->where('id', !empty($sub_area) ? $sub_area->master_area_id : 0)
-                ->where('area_type','<>', $request->area_type)
-                ->with(['master_sub_area' => function ($q) {
-                    $q->where('is_active', '1')->whereIn('is_charter',[0,2]);
-                }])->where('is_active', '1')->whereIn('is_charter',[0,2])->get();
-        }
-
-        $schedule = ScheduleQueryService::generate_data($request);
-
         $pages = Page::get();
         $data = [
-            'title' => env('APP_NAME'),
+            'title' => 'schedule',
             'app_name' => env('APP_NAME'),
+            'pages' => $pages
+        ];
+        return view('user.schedule', $data);
+    }
+
+    public function search(Request $request)
+    {
+        // Validate the request
+        $validated = $request->validate([
+            'booking_type' => 'required|string',
+            'to_master_sub_area_id' => 'required|integer',
+            'area_type' => 'required|string',
+        ]);
+    
+        // Determine charter types based on booking type
+        $charterTypes = $request->booking_type !== 'shuttle' ? [1, 2] : [0, 2];
+    
+        // Get master area with sub areas
+        $master_area = MasterArea::query()
+            ->with(['master_sub_area' => function ($q) use ($charterTypes) {
+                $q->where('is_active', '1')->whereIn('is_charter', $charterTypes);
+            }])
+            ->where('is_active', '1')
+            ->whereIn('is_charter', $charterTypes)
+            ->get();
+    
+        // Get the sub area
+        $sub_area = MasterSubArea::find($request->to_master_sub_area_id);
+    
+        // Get arrival area with sub areas
+        $arrival_area = MasterArea::query()
+            ->where('area_type', '<>', $request->area_type)
+            ->with(['master_sub_area' => function ($q) use ($charterTypes) {
+                $q->where('is_active', '1')->whereIn('is_charter', $charterTypes);
+            }])
+            ->where('is_active', '1')
+            ->whereIn('is_charter', $charterTypes)
+            ->get();
+    
+        // Generate schedule data
+        $schedule = ScheduleQueryService::generate_data($request);
+    
+        // Get pages
+        $pages = Page::all();
+    
+        // Prepare data for the view
+        $data = [
+            'title' => config('app.name'),
+            'app_name' => config('app.name'),
             'master_area' => $master_area,
             'arrival_area' => $arrival_area,
             'request' => $request,
             'schedule' => $schedule,
             'pages' => $pages,
         ];
-
+    
+        // Return the view with data
         return view('search', $data);
     }
+    
 
     public function booking(Request $request)
     {
@@ -263,7 +277,7 @@ class WelcomeController extends Controller
             'pages' => $pages,
             'bookings' => $bookings,
             'vouchers' => $vouchers,
-            'hashed_code' => \Crypt::encrypt($bookings->booking_number),
+            'hashed_code' => encrypt($bookings->booking_number),
         ];
 
         return view('check', $data);
@@ -289,7 +303,7 @@ class WelcomeController extends Controller
             'bookings' => $bookings,
             'charter' => $charter,
             'booking_customers' => $booking_customers,
-            'hashed_code' => \Crypt::encrypt($bookings->booking_number),
+            'hashed_code' => encrypt($bookings->booking_number),
         ];
 
         $pdf = PDF::loadview('ticket', $data);
@@ -302,7 +316,7 @@ class WelcomeController extends Controller
         $pages = Page::get();
 
         try {
-            $decryptNumberBooking = \Crypt::decrypt($request->hcode);
+            $decryptNumberBooking = decrypt($request->hcode);
         } catch (DecryptException $e) {
             $data = [
                 'title' => 'Booking process',
@@ -347,7 +361,7 @@ class WelcomeController extends Controller
 
         if ($response->status !== 'requires_payment_method') {
             try {
-                $decryptNumberBooking = \Crypt::decrypt($request->hcode);
+                $decryptNumberBooking = decrypt($request->hcode);
             } catch (DecryptException $e) {
                 abort(401);
             }
@@ -361,7 +375,7 @@ class WelcomeController extends Controller
             'pages' => $pages,
             'bookings' => $bookings,
             'vouchers' => $vouchers,
-            'hcode' => \Crypt::encrypt($decryptNumberBooking),
+            'hcode' => encrypt($decryptNumberBooking),
             'client_secret' => $response->client_secret,
             'intent_id' => $response->id
         ];
@@ -372,7 +386,7 @@ class WelcomeController extends Controller
     public function booking_process(Request $request)
     {
         try {
-            $decryptNumberBooking = \Crypt::decrypt($request->hcode);
+            $decryptNumberBooking = decrypt($request->hcode);
         } catch (DecryptException $e) {
             abort(401);
         }
@@ -407,7 +421,7 @@ class WelcomeController extends Controller
     public function payment_venmo(Request $request)
     {
         try {
-            $decryptNumberBooking = \Crypt::decrypt($request->hcode);
+            $decryptNumberBooking = decrypt($request->hcode);
         } catch (DecryptException $e) {
             abort(401);
         }
@@ -427,7 +441,7 @@ class WelcomeController extends Controller
     public function payment_bank(Request $request)
     {
         try {
-            $decryptNumberBooking = \Crypt::decrypt($request->hcode);
+            $decryptNumberBooking = decrypt($request->hcode);
         } catch (DecryptException $e) {
             abort(401);
         }

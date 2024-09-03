@@ -5,14 +5,14 @@
               <div class="navbar-brand-img d-flex ">
                   <img src="{{ asset('img/logo-greenexpressone-300px.png') }}" alt="Logo {{ $app_name }}"
                        class="img-logo logo-brand">
-{{--                  <div>--}}
-{{--                      <small>--}}
-{{--                          Green Express LLC--}}
-{{--                      </small>--}}
-{{--                      <small>--}}
-{{--                          1654 South Chadwick Street, Philadelphia, PA 19145--}}
-{{--                      </small>--}}
-{{--                  </div>--}}
+                 {{-- <div>
+                     <small>
+                         Green Express LLC
+                     </small>
+                     <small>
+                         1654 South Chadwick Street, Philadelphia, PA 19145
+                     </small>
+                 </div> --}}
               </div>
         </a>
 
@@ -27,15 +27,17 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="/">Home</a>
                 </li>
-{{--                @foreach ($pages as $page)--}}
-{{--                    @if (!in_array($page->id, [1, 2]))--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a class="nav-link" href="/page/{{ $page->slug }}">{{ $page->page_title }}</a>--}}
-{{--                        </li>--}}
-{{--                    @endif--}}
-{{--                @endforeach--}}
+               @foreach ($pages as $page)
+                   @if (!in_array($page->id, [1, 2]))
+                       <li class="nav-item">
+                           <a class="nav-link" href="/page/{{ $page->slug }}">{{ $page->page_title }}</a>
+                       </li>
+                   @endif
+               @endforeach
 
-                {!! generate_header() !!}
+               <li class="nav-item">
+                    <a class="nav-link" href="/schedule">new schedule</a>
+                </li>
 
                 <li class="nav-item">
                     <button type="button" class="nav-link font-weight-bold btn btn-dark text-white px-2 shadow"

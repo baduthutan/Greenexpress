@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\CronJobController;
 use App\Http\Controllers\MasterSpecialAreaController;
+use App\Http\Controllers\DstController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,7 @@ use App\Http\Controllers\MasterSpecialAreaController;
 
 Route::get('/', [WelcomeController::class, 'index']);
 Route::get('/page/{slug}', [WelcomeController::class, 'page']);
+Route::get('/schedule', [WelcomeController::class, 'schedule']);
 Route::get('/search', [WelcomeController::class, 'search'])->name('search');
 Route::get('/booking', function () {
     $data = [
@@ -85,7 +87,7 @@ Route::prefix('admin')->middleware('prevent-back-history')->group(function () {
     Route::post('/pages/store', [PagesController::class, 'store'])->name('admin.pages.store')->middleware('admin');
     Route::get('/pages/edit/{id}', [PagesController::class, 'edit'])->name('admin.pages.edit')->middleware('admin');
     Route::put('/pages/update/{id}', [PagesController::class, 'update'])->name('admin.pages.update')->middleware('admin');
-    Route::delete('/pages/delete/{id}', [PagesController::class, 'delete'])->name('admin.voucher.delete')->middleware('admin');
+    Route::delete('/pages/delete/{id}', [PagesController::class, 'delete'])->name('admin.pages.delete')->middleware('admin');
 
     // Route::get('/agent', [AgentController::class, 'index'])->name('admin.agent')->middleware('admin');
     // Route::post('/agent', [AgentController::class, 'store'])->name('admin.agent.store')->middleware('admin');
@@ -125,6 +127,10 @@ Route::prefix('admin')->middleware('prevent-back-history')->group(function () {
     Route::put('/admin/update/{id}', [AdminController::class, 'update'])->name('admin.admin.update')->middleware('admin');
     Route::post('/admin/reset_password/{id}', [AdminController::class, 'reset_password'])->name('admin.admin.reset_password')->middleware('admin');
     Route::delete('/admin/delete/{id}', [AdminController::class, 'delete'])->name('admin.admin.delete')->middleware('admin');
+
+    Route::get('/dst', [DstController::class, 'index'])->name('admin.dst')->middleware('admin');
+    Route::get('/dst/edit', [DstController::class, 'edit'])->name('admin.dst.edit')->middleware('admin');
+    Route::put('/dst/update', [DstController::class, 'update'])->name('admin.dst.update')->middleware('admin');
 
     Route::get('/user', [UserController::class, 'index'])->name('admin.user')->middleware('admin');
     Route::post('/user', [UserController::class, 'store'])->name('admin.user.store')->middleware('admin');

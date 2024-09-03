@@ -191,6 +191,12 @@
                                                             data-i18n="voucher">Voucher</span>
                     </a>
                 </li>
+                <li class=" nav-item">
+                    <a class="d-flex align-items-center" href="/admin/dst">
+                        <i data-feather="clock"></i><span class="menu-title text-truncate"
+                                                            data-i18n="dst">DST</span>
+                    </a>
+                </li>
             @endif
         </ul>
     </div>

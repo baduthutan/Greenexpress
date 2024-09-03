@@ -21,7 +21,7 @@
 {{--                        </ul>--}}
 {{--                    @endforeach--}}
                     <ul>
-                        {!! generate_footer() !!}
+            
                     </ul>
                 </div>
             </div>

@@ -60,6 +60,7 @@
                         <div class="card-body">
                             <h6 class="text-center font-weight-bold mb-4">Let's Have a Better Trip Experience!<br>Booking in Just a Few Clicks</h6>
                             <form action="{{ route('search') }}" method="get">
+                                @csrf
                                 <input type="hidden" name="area_type" id="area_type" value="{{@$request->area_type}}"/>
 
                                 <div class="row">
@@ -255,12 +256,12 @@
     {{--        </div>--}}
     {{--    </section>--}}
 
-    @include('layouts.frontend.android')
+
 @endsection
 @section('vitamin')
     <script>
         let booking_type = null;
     </script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="{{ asset('js/booking.js') }}"></script>
+    <script src="js/booking.js"></script>
 @endsection
